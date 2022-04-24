@@ -73,6 +73,8 @@ def get_route(hostname):
     tracelist2 = [] #This is your list to contain all traces
 
     for ttl in range(1,MAX_HOPS):
+        tracelist1 = []
+        tracelist1.append(str(ttl))
         for tries in range(TRIES):
             destAddr = gethostbyname(hostname)
 
@@ -120,7 +122,7 @@ def get_route(hostname):
                     #Fill in end
                 except herror:   #if the host does not provide a hostname
                     #Fill in start
-                    tracelist1.append("host does not provide a hostname")
+                    tracelist1.append("hostname not returnable")
                     #Fill in end
 
                 if types == 11:
@@ -160,7 +162,7 @@ def get_route(hostname):
             finally:
                 mySocket.close()
 
-    return tracelist2
+    return (tracelist2)
 
 if __name__ == '__main__':
     get_route("google.co.il")
