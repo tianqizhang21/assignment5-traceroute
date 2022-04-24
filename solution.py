@@ -57,10 +57,10 @@ def build_packet():
     data = struct.pack('d', time.time())
     myChecksum = checksum(header + data)
 
-    # if sys.platform == 'darwin':
-    #     myChecksum = socket.htons(myChecksum) & 0xffff
-    # else:
-    #     myChecksum = htons(myChecksum)
+    if sys.platform == 'darwin':
+        myChecksum = socket.htons(myChecksum) & 0xffff
+    else:
+        myChecksum = htons(myChecksum)
 
     header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, ID, 1)
 
